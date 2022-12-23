@@ -1,0 +1,68 @@
+#! /bin/bash
+# Usage: ./pointer-chasing write > result/"$(hostname)-$(date +%Y%m%d%H%M%S)-comment"
+# ./csv-parse.py dummy cycle_read_end cycle_read_start | less
+print_help() {
+    echo "Usage: $0 job_type [region_size] [block_size]"
+    echo "       job_type:    [write | read_and_write | read_after_write]"
+    echo "       region_size: (optional) pointer chasing region size in byte"
+    echo "       block_size:  (optional) pointer chasing block  size in byte"
+    echo
+    echo "Note:  Set region_size AND block_size to run single pointer chasing test,"
+    echo "       or use the predefined region_size and block_size in this script"
+}
+
+if [ $# -ne 1 ] && [ $# -ne 3 ]; then
+    print_help
+    exit 1
+fi
+
+cd src
+gcc pointer_chasing.c chasing.c -O2 -lpmem -o pc-bin
+
+git diff src/*
+op=0
+task_name=''
+case $1 in
+write)
+    op=0
+    task_name=TASK_PC_ST
+    ;;
+read_after_write)
+    op=1
+    task_name=TASK_PC_RAW
+    ;;
+read_and_write)
+    op=2
+    task_name=TASK_PC_LD_ST
+    ;;
+*)
+    print_help
+    exit 1
+    ;;
+esac
+
+if [ $# -eq 1 ]; then
+    region_small=(64 128 256 512 1024 2048 4096 8192)
+    region_med=($(seq -s ' ' $((2 ** 14)) $((2 ** 12)) $((2 ** 16))))
+    region_larger=($(seq -s ' ' $((2 ** 18)) $((2 ** 18)) $((2 ** 22))))
+    region_largest=($(seq -s ' ' $((2 ** 23)) $((2 ** 22)) $((2 ** 26))))
+
+    region_array=("${region_small[@]}" "${region_med[@]}" "${region_larger[@]}" "${region_largest[@]}")
+    block_array=(64)
+else
+    region_array=($2)
+    block_array=($3)
+fi
+
+echo Test region sizes: "${region_array[@]}"
+echo Test block sizes: "${block_array[@]}"
+echo Test op index: $op
+
+for block_size in ${block_array[@]}; do
+    for region_size in ${region_array[@]}; do
+        if (($region_size % $block_size != 0)); then
+            continue
+        fi
+        ./pc-bin $region_size $block_size $op
+    done
+done
