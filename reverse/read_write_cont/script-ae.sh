@@ -2,7 +2,7 @@
 
 make reader writer
 
-mkdir -p result
+mkdir -p result-ae
 
 run_exp() {
     local exp_type=$1
@@ -26,7 +26,7 @@ run_exp() {
     ./reader /mnt/ramdisk/reader > tmp &
     sleep 10
 
-    tail -n 100 tmp > result/$result_name
+    tail -n 100 tmp > result-ae/$result_name
     echo "Killing everything"
     killall reader writer
     rm tmp
