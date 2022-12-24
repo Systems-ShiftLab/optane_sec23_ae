@@ -17,7 +17,7 @@ gcc bit_pc.c aux.c -O2 -lpmem -o bit_pc_bin
 count_0=(1 2 4  8 16 32 64 128)
 count_1=($(seq -s ' ' $((2 ** 8)) $((2 ** 6)) $((2 ** 10))))
 count_2=($(seq -s ' ' $((2 ** 12)) $((2 ** 12)) $((2 ** 16))))
-count_3=($(seq -s ' ' $((2 ** 16)) $((2 ** 16)) $((2 ** 19))))
+count_3=($(seq -s ' ' $((2 ** 17)) $((2 ** 16)) $((2 ** 19))))
 
 count_array=("${count_0[@]}" "${count_1[@]}" "${count_2[@]}" "${count_3[@]}")
 echo Test counts: "${count_array[@]}"
@@ -78,8 +78,7 @@ hacky_helper2 12 13
 hacky_helper2 12 14
 hacky_helper2 12 19
 hacky_helper2 12 20
-hacky_helper2 12 21
 
 cd $result_dir
-paste size mask_clean mask_12 mask_13 mask_12-13 mask_14 mask_12-14 mask_19 mask_20 mask_21 mask_12-19 mask_12-20 mask_12-21 -d ',' > ait_assoc.csv
+paste size mask_clean mask_12 mask_13 mask_12-13 mask_14 mask_12-14 mask_19 mask_20 mask_21 mask_12-19 mask_12-20 -d ',' > ait_assoc.csv
 paste size mask_clean mask_8 mask_9 mask_10 mask_11 mask_12 mask_13 mask_14 mask_15 mask_16 mask_17 mask_18 mask_19 mask_20 mask_21 mask_12-19 -d ',' > rmw_assoc.csv
