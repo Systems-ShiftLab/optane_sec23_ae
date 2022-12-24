@@ -7,8 +7,7 @@ cd "$script_dir"
 
 ./pc-parse.py tmp1 tmp2
 
-mkdir -p result
-./csv-parse.py tmp2 cycle_read_end  cycle_read_start > result/gen_hier.csv
+mkdir -p result-ae
+./csv-parse.py tmp2 cycle_read_end  cycle_read_start > result-ae/gen_hier.csv
 
 rm tmp*
-
