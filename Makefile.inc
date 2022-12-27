@@ -1,7 +1,7 @@
 ROOT_DIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
-INCLUDE_DIR ?= $(ROOT_DIR)/common
-LIB_DIR ?= $(ROOT_DIR)/common
+INCLUDE_DIR ?= $(ROOT_DIR)/util
+LIB_DIR ?= $(ROOT_DIR)/util
 
 CC = gcc
 CXX = g++
