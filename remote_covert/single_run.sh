@@ -14,10 +14,10 @@ result=$res_dir/$res_filename
 echo Saving to $result
 
 start_remote_server() {
-    kv_port=$kv_port remote_ip=$kv_ip kv_backing_file=/mnt/pmem0/wearlevel-covert ../common/remote_commands.sh start
+    kv_port=$kv_port remote_ip=$kv_ip kv_backing_file=/mnt/pmem0/wearlevel-covert ../common/remote_commands/start_kv_server.sh
 }
 stop_remote_server() {
-    remote_ip=$kv_ip ../common/remote_commands.sh end
+    remote_ip=$kv_ip ../common/remote_commands/kill_kv_server.sh
 }
 
 mkdir -p $res_dir
