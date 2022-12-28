@@ -5,5 +5,6 @@ This readme contains basic commands to reproduce results of the experiments.
 - ndctl/daxctl v68
 - pmdk 1.9.2
 - pmemkv 1.3
+- libuv 1.18
 
 ## Running Experiments
