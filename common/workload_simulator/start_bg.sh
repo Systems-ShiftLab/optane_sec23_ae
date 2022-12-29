@@ -8,11 +8,9 @@ make workload_simulator
 file=$1 
 util=$2 
 
-log_file=log
-errlog_file=errlog
 
 (
-    nohup ./workload_simulator $file $util > $log_file 2> $errlog_file & 
+    nohup ./workload_simulator $file $util > /dev/null 2>&1  & 
     sim_pid=$!
 ) > /dev/null 2>&1
 
@@ -24,5 +22,3 @@ sleep 0.2
 }
 
 echo "Started wl_simulator with utilization $util"
-echo "Saving stdout to $log_file"
-echo "Saving stderr to $errlog_file"
