@@ -5,22 +5,19 @@ cd "$script_dir"
 
 kv_ip=${kv_ip:-10.0.0.1}
 kv_port=${kv_port:-1111}
+kv_file=${kv_file:-/mnt/pmem0/wearlevel-covert}
 rep_count=${rep_count:-30}
-res_dir=${res_dir:-result-ae}
 score_threshold=${score_threshold:-1}
 
-res_filename=${res_filename:-result}
-result=$res_dir/$res_filename
+result=${result:-result}
 echo Saving to $result
 
 start_remote_server() {
-    kv_port=$kv_port remote_ip=$kv_ip kv_backing_file=/mnt/pmem0/wearlevel-covert ../common/remote_commands/start_kv_server.sh
+    kv_port=$kv_port remote_ip=$kv_ip kv_backing_file=$kv_file ../common/remote_commands/start_kv_server.sh
 }
 stop_remote_server() {
     remote_ip=$kv_ip ../common/remote_commands/kill_kv_server.sh
 }
-
-mkdir -p $res_dir
 
 make receiver sender
 
