@@ -8,4 +8,5 @@ wl_simkill=${wl_simkill:-optane_sec23_ae/common/workload_simulator/end_bg.sh}
 source common.sh
 
 echo "Killing all wl_sims"
-ssh $remote_user@$remote_ip "$wl_simkill" || echo "Failure"
+
+./generic.sh $wl_simkill 

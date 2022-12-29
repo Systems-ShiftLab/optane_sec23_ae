@@ -9,4 +9,4 @@ source common.sh
 kv_killcommand=${kv_killcommand:-optane_sec23_ae/common/pmemkv_server/end_bg.sh}
 
 echo "Killing servers"
-ssh $remote_user@$remote_ip "$kv_killcommand" || echo "No existing servers"
+./generic.sh $kv_killcommand
