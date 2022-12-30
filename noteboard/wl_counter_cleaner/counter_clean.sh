@@ -8,7 +8,7 @@ if [[ $# -ne 1 ]] ; then
     exit 1
 fi
 
-make counter_cleaner
+make counter_clean
 
 
-./counter_cleaner  $1
+./counter_clean $1
