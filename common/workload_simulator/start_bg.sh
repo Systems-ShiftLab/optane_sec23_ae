@@ -11,13 +11,16 @@ util=$2
 
 (
     nohup ./workload_simulator $file $util > /dev/null 2>&1  & 
-    sim_pid=$!
+    echo $! > .pid
 ) > /dev/null 2>&1
 
+
 sleep 0.2
+sim_pid=$(cat .pid)
+echo $sim_pid
 
 [[ -e /proc/$sim_pid ]] || { 
-    echo Connection error
+    echo "Error"
     exit 1
 }
 

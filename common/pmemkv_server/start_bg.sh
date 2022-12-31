@@ -19,7 +19,7 @@ errlog_file=${errlog_file:-errlog}
 (
     export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64
     nohup ./pmemkv_server $file $port > $log_file 2> $errlog_file & 
-    echo $! > .server_pid 
+    echo $! > .server_pid  #SUBSHELL!!
 ) > /dev/null 2>&1
 
 server_pid=$(cat .server_pid)
@@ -28,7 +28,7 @@ rm .server_pid
 sleep 0.2
 
 [[ -e /proc/$server_pid ]] || { 
-    echo Connection error
+    echo Error
     exit 1
 }
 
