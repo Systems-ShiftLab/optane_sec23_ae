@@ -1,0 +1,9 @@
+#pragma once
+
+#define SENDER_WRITE_COUNT 1500
+
+#define RECEIVER_THRES_LO 800
+#define RECEIVER_THRES_MID 3000
+#define RECEIVER_THRES_HI 4000
+
+#define WEAR_LVL_LAT 105
