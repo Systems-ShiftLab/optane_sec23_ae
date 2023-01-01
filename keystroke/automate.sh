@@ -29,7 +29,7 @@ exit_function() {
 }
 trap exit_function SIGINT
 
-[[ -d keystrokes/keystroke100 ]] || ./download_dataset.sh
+[[ -d keystrokes/keystroke100 ]] || ./download-dataset.sh
 
 remote_cmd "$prober_kill; $prober_cmd $target_backing_file 2>errlog > $prober_trace &"
 remote_cmd "$server_kill; $server_cmd $target_backing_file $ws_port"
