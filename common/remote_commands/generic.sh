@@ -10,4 +10,5 @@ fi
 source common.sh
 
 echo "Starting running command on $remote_ip as $remote_user"
+echo ssh $remote_user@$remote_ip $* 
 ssh $remote_user@$remote_ip $* || echo "Failed to run command"
