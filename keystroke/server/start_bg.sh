@@ -13,6 +13,8 @@ port=$2
 
 make ws_server
 
+rm $file
+
 log_file=${log_file:-log}
 errlog_file=${errlog_file:-errlog}
 
