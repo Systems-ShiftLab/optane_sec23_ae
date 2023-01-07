@@ -34,7 +34,7 @@ def main():
     ofile_stat = sys.argv[2]
     ofile_csv = sys.argv[3]
 
-    input_list = sorted_alphanumeric(glob(target_dir+'/*'))
+    input_list = sorted_alphanumeric(glob(target_dir+'/*/'))
     
     cum_diffs = []
     cum_truth = []
