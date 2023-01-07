@@ -20,7 +20,7 @@ prepare_result() {
     echo "Preparing $result_dir"
     rm -rf $result_dir
     mkdir -p $result_dir
-    cp -R keystrokes/keystroke100/user1* $result_dir #We can change this to control number of typists
+    cp -R keystrokes/keystroke100/* $result_dir #We can change this to control number of typists
     rm $result_dir/*/pressure.txt
     for dir in $result_dir/* ; do
         ./gen_ground_truth.py $dir/latency.txt $dir/ground_truth.txt &
