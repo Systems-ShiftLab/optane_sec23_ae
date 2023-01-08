@@ -27,6 +27,7 @@ prepare_result() {
     done
     wait
     rm $result_dir/*/latency.txt
+    echo "exp_count = $exp_count" | tee $result_dir/config.dat
 }
 
 
