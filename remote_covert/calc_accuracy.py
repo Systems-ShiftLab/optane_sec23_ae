@@ -41,8 +41,8 @@ def main():
             mis_guesses+=1
 
     error_rate = mis_guesses/(len(common_tsps))
-    error_rate *= 100
-    print(int(error_rate))
+    acc = 1 - error_rate
+    print(acc)
 
 if __name__=='__main__':
     main()

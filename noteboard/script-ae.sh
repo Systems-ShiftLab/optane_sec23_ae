@@ -4,7 +4,7 @@ set -e
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$script_dir"
 
-exp_cnt=${exp_cnt:-1}
+exp_cnt=${exp_cnt:-10}
 resdir=${resdir:-result-ae}
 
 sender_msg=$(cat msg.txt)
@@ -91,8 +91,7 @@ mkdir -p result-ae
 
 echo "exp_count = $exp_count
 redundancy = $redundancy
-message_size = $sender_msg_size
-"  | tee result-ae/config.dat
+message_size = $sender_msg_size"  | tee result-ae/config.dat
 
 ../common/remote_commands/kill_wl_sim.sh
 
