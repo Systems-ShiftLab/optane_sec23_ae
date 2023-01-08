@@ -41,7 +41,7 @@ def main():
         ofd.write(f'{nametag}_acc_mean = {tmp[0]:0.2f}\n')
         ofd.write(f'{nametag}_acc_stdev = {tmp[1]:0.2f}\n')
         ofd.write(f'{nametag}_kbps_mean = {tmp[2]:0.2f}\n')
-        ofd.write(f'{nametag}_kpbs_stdev = {tmp[3]:0.2f}\n')
+        ofd.write(f'{nametag}_kbps_stdev = {tmp[3]:0.2f}\n')
 
     helper("ait",aitfile)
     helper("rmw",rmwfile)
