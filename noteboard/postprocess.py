@@ -31,13 +31,14 @@ def get_list(inp_file,column):
     return ret
 
 def main():
-    if len(sys.argv) != 4:
-        print(f'Usage: {sys.argv[0]} <receiver file glob> <column number> <threshold>')
+    if len(sys.argv) != 5:
+        print(f'Usage: {sys.argv[0]} <receiver file glob> <column number> <threshold> <output dat file>')
         return
 
     receiver_file_glob = sys.argv[1]
     col_number  = int(sys.argv[2])
     threshold  = int(sys.argv[3])
+    ofile  = sys.argv[4]
 
 
     stats = []
@@ -47,16 +48,14 @@ def main():
         print(receiver_file,s)
         stats.append(s)
 
-    stats = stats[0:10]
-
     mn = statistics.mean(stats)
-    print("Mean:",mn)
+    stdev = 0
     if len(stats) > 1:
         stdev = statistics.stdev(stats)
-        print("Stdev:",stdev)
-        print("CoVar:",stdev/mn)
-        print(f"{mn * 100:0.2f} +- {stdev/mn:0.2f} %")
 
+    with open(ofile,'w') as ofd:
+        ofd.write(f"noteboard_acc_mean = {mn}\n")
+        ofd.write(f"noteboard_acc_stdev = {stdev}\n")
 
 if __name__ == '__main__':
     main()
