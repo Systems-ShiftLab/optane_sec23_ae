@@ -46,6 +46,7 @@ def main():
         l = get_list(receiver_file,col_number)
         s = gen_stats(l,threshold)
         print(receiver_file,s)
+        s *= 100 #Generating percentages
         stats.append(s)
 
     mn = statistics.mean(stats)
@@ -54,8 +55,8 @@ def main():
         stdev = statistics.stdev(stats)
 
     with open(ofile,'w') as ofd:
-        ofd.write(f"noteboard_acc_mean = {mn}\n")
-        ofd.write(f"noteboard_acc_stdev = {stdev}\n")
+        ofd.write(f"noteboard_acc_mean = {mn:0.2f}\n")
+        ofd.write(f"noteboard_acc_stdev = {stdev:0.2f}\n")
 
 if __name__ == '__main__':
     main()

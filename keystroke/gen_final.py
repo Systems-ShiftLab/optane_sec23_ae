@@ -65,8 +65,10 @@ def main():
         cum_truth.extend(gt)
         cum_diffs.extend(diffs)
 
-        precision_list.append(prec)
-        recall_list.append(recall)
+        prec_prct = prec * 100
+        recall_prct = recall * 100
+        precision_list.append(prec_prct)
+        recall_list.append(recall_prct)
 
         print(f"Input: {input_dir}, Missed Keystrokes: {fn}, Fake Keystrokes: {fp}, Precision: {prec}, Recall: {recall}")
 
