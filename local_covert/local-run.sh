@@ -3,7 +3,7 @@
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$script_dir"
 
-rep_count=${rep_count:-110}
+rep_count=${rep_count:-100}
 msg_size=${msg_size:-1000}
 exps=${exps:-'cont ait rmw'}
 res_dir=${res_dir:-results}
