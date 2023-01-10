@@ -69,11 +69,11 @@ single_run() {
 
 result_dir=${result_dir:-result-ae}
 mkdir -p $result_dir
-echo "exp_count = $rep_count"  | tee $result_dir/config.dat
+echo "exp_count = $rep_count"  | tee $result_dir/remote-covert-config.dat
 
 
 end_wl
-single_run  $result_dir/remote-covert.dat
+single_run  $result_dir/remote-covert-result.dat
 
 #start_wl 0.1
 #single_run  $result_dir/remote-covert-lo.dat

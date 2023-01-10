@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
 	pmem_exp_init("/mnt/ramdisk/pmem_overwr",REGION_SIZE,true);
 
 
+    printf("offset,writes_to_wl\n");
 	for(int i=0;i<num_locs;i++)
 	{
         int offset = i * RMWL_SIZE;

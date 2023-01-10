@@ -89,9 +89,9 @@ single_run() {
 rm -rf result-ae
 mkdir -p result-ae
 
-echo "exp_count = $exp_count
+echo "exp_count = $exp_cnt
 redundancy = $redundancy
-message_size = $sender_msg_size"  | tee result-ae/config.dat
+message_size = $sender_msg_size"  | tee result-ae/noteboard-config.dat
 
 ../common/remote_commands/kill_wl_sim.sh
 
@@ -115,4 +115,4 @@ message_size = $sender_msg_size"  | tee result-ae/config.dat
 
 #Running no-noise experiment
 clean_mnt
-single_run result-ae/noteboard.dat
+single_run result-ae/noteboard-result.dat
