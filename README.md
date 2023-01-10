@@ -34,3 +34,14 @@ More precisely, this script does the following:
 ├── reverse         # Reverse engineering experiments
 └── util            # Low level (C / asm) code used in many experiments
 ```
+
+## Cite Us
+``` BibTeX
+@inproceedings{Liu2023Side,
+ author = {Liu, Sihang and Kanniwadi, Suraaj and Schwarzl, Martin and Kogler, Andreas and Gruss, Daniel and Khan, Samira},
+ booktitle = {USENIX Security Symposium},
+ title = {Side-Channel Attacks on Optane Persistent Memory},
+ url = {media/files/optane.pdf},
+ year = {2023}
+}
+```
