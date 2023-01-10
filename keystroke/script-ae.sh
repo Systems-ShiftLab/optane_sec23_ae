@@ -27,7 +27,6 @@ prepare_result() {
     done
     wait
     rm $result_dir/*/latency.txt
-    echo "exp_count = $exp_count" | tee $result_dir/config.dat
 }
 
 
@@ -96,3 +95,4 @@ for i in $result_dir/* ; do
 done
 
 ./gen_final.py $result_dir $result_dir/keystroke_attack_result.dat $result_dir/keystroke_attack_result_time.csv
+echo "exp_count = $exp_count" | tee $result_dir/config.dat
