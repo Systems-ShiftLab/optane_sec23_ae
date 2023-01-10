@@ -3,9 +3,8 @@
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$script_dir"
 
-export remote_ip=10.0.0.1
-export remote_user=suraajks
-
+export remote_ip=${remote_ip:-10.0.0.1}
+export remote_user=${remote_user:-suraajks}
 
 ../common/remote_commands/generic.sh optane_sec23_ae/local_covert/local-run.sh
 
