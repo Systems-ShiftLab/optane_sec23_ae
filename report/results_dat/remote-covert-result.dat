@@ -1,0 +1,6 @@
+acc_mean = 96.33
+acc_stdev = 0.58
+bws_mean = 10.03
+bws_stdev = 0.04
+packets_per_bit_mean = 2682.57
+packets_per_bit_stdev = 14.03

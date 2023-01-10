@@ -1,0 +1,12 @@
+ait_acc_mean = 97.72
+ait_acc_stdev = 1.90
+ait_kbps_mean = 10.50
+ait_kbps_stdev = 0.00
+rmw_acc_mean = 99.60
+rmw_acc_stdev = 0.17
+rmw_kbps_mean = 11.35
+rmw_kbps_stdev = 0.00
+cont_acc_mean = 99.53
+cont_acc_stdev = 0.18
+cont_kbps_mean = 2.33
+cont_kbps_stdev = 0.00
