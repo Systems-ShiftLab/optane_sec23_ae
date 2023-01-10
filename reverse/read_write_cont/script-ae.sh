@@ -32,9 +32,9 @@ run_exp() {
     rm tmp
 }
 
-run_exp r read.csv
-run_exp rr read-read.csv
-run_exp rw read-write-10.csv 0.1
-run_exp rw read-write-30.csv 0.3
-run_exp rw read-write-50.csv 0.5
-run_exp rw read-write-100.csv 1
+run_exp r rw_cont_read.csv
+run_exp rr rw_cont_read_read.csv
+run_exp rw rw_cont_read_write_10.csv 0.1
+run_exp rw rw_cont_read_write_30.csv 0.3
+run_exp rw rw_cont_read_write_50.csv 0.5
+run_exp rw rw_cont_read_write_100.csv 1

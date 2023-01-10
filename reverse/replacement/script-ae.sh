@@ -31,7 +31,7 @@ run_exp() {
            ./$exp_bin $j $ait_set $run_type >> tmp 
         done 
         evicts=$(cal_avg tmp)
-        rate=$( echo "$evicts / $j" | bc -l )
+        rate=$( python3 <<< "print($evicts / $j)")
         echo $j,$rate | tee -a  $resfile
     done
 }
