@@ -34,21 +34,21 @@
 \maketitle
 % \thispagestyle{firstpage}
 
-\newcommand{\corresponds}[1]{\textbf{\\Corresponds to #1  in our original paper.}}
+\newcommand{\corresponds}[1]{\textbf{The following corresponds to #1  in our original paper.}}
 
-\section{Reverse Engineering}
-\subsection{General Heirarchy}
-The following figure shows how Optane average read latency varies with increasing working set sizes.
+\begin{minipage}{\linewidth}
+\section*{Reverse Engineering - General Heirarchy}
 \corresponds{figure 3}
 \begin{figure}[H]
 \centering
 \adjustbox{max width=\hsize}{\input{tikz_scripts/general_hierarchy.tikz}}
 \label{fig:general_hierarchy}
-\vspace{-0.2cm}
 \end{figure}
+\hrule
+\end{minipage}
 
-\subsection{RMW Results}
-The following figures depict the RMW buffer's associativity and replacement policy.
+\begin{minipage}{\linewidth}
+\section*{Reverse Engineering - RMW }
 \corresponds{figure 5}
 \begin{figure}[H]
 \centering
@@ -60,18 +60,18 @@ The following figures depict the RMW buffer's associativity and replacement poli
 \end{subfigure}
 \label{fig:rmw_reverse}
 \end{figure}
+\hrule
+\end{minipage}
 
 %\begin{figure}[t]
-%% \vspace{-0.8cm}
 %\centering
 %\input{tikz_scripts/rmw_flush.tikz}
 %\caption{Effect of \texttt{CLFLUSH} to RMW buffer.}
 %\label{fig:rmw_flush}
-%\vspace{-0.4cm}
 %\end{figure}
 
-\subsection{AIT Results}
-The following figures depict the AIT buffer's associativity and replacement policy.
+\begin{minipage}{\linewidth}
+\section*{Reverse Engineering - AIT}
 \corresponds{figure 7}
 \begin{figure}[H]
 \centering
@@ -80,15 +80,15 @@ The following figures depict the AIT buffer's associativity and replacement poli
 \end{subfigure}
 \begin{subfigure}[b]{0.45\hsize}
 \adjustbox{}{\input{tikz_scripts/ait_replacement.tikz}}
-% \vspace{-0.2cm}
 \end{subfigure}
 \label{fig:ait_reverse}
-\vspace{-0.4cm}
 \end{figure}
+\hrule
+\end{minipage}
 
-\subsection{Wear Levelling}
-Here we reproduce the results showing wear-levelling behaviour in Optane.
-\corresponds{figure 8, 9}
+\begin{minipage}{\linewidth}
+\section*{Reverse Engineering - Wear Leveling Distribution}
+\corresponds{figure 8}
 \begin{figure}[H]
 % \centering
 \adjustbox{max width=\hsize}{
@@ -99,19 +99,27 @@ Here we reproduce the results showing wear-levelling behaviour in Optane.
 \adjustbox{}{\input{tikz_scripts/wear_leveling_timing_hist.tikz}}
 \end{subfigure}}
 \label{fig:wear_leveling_timing}
-\vspace{-0.4cm}
 \end{figure}
+\hrule
+\end{minipage}
+
+
+\begin{minipage}{\linewidth}
+\section*{Reverse Engineering - Effect of reads on Wear Leveling}
+\corresponds{figure 9}
 \begin{figure}[H]
 \centering
 \input{tikz_scripts/wear_leveling_readwrite.tikz}
 \label{fig:wear-leveling-readwrite}
-\vspace{-0.4cm}
 \end{figure}
+\hrule
+\end{minipage}
 
-Here, we reproduce results that depict the wear-levelling and counter granularities.
+
+\begin{minipage}{\linewidth}
+\section*{Reverse Engineering - Wear Leveling Granularity}
 \corresponds{figure 10}
 \begin{figure}[H]
-% \vspace{-0.9cm}
 \centering
 \begin{subfigure}[b]{0.49\hsize}
 \input{tikz_scripts/wear_leveling_counter_gran.tikz}
@@ -121,20 +129,24 @@ Here, we reproduce results that depict the wear-levelling and counter granularit
 \end{subfigure}
 \label{fig:wear-leveling-granularity}
 \end{figure}
+\hrule
+\end{minipage}
 
 
-\subsection{Read-Write Contention}
-Here, we show how read performance in Optane degrades when there are concurrent writes.
+\begin{minipage}{\linewidth}
+\section*{Reverse Engineering - Read-Write Contention}
 \corresponds{figure 11}
 \begin{figure}[H]
 \centering
 \input{tikz_scripts/read_write_contention.tikz}
 \label{fig:read_write_contention}
-\vspace{-0.2cm}
 \end{figure}
+\hrule
+\end{minipage}
 
-\section{Local Covert Channel}
-The following table contains results for the local covert channel experiment.
+\begin{minipage}{\linewidth}
+\section*{Local Covert Channel}
+\corresponds{table 2}
 \newcommand{\covertdata}[1]{\accessdatfile{covert}{#1}}
 \begin{table}[H]
     \label{tab:local_covert}
@@ -151,17 +163,17 @@ The following table contains results for the local covert channel experiment.
         % \midrule
         \bottomrule
     \end{tabular}
-    \vspace{-0.2cm}
 \end{table}
+\hrule
+\end{minipage}
 
 
-\section{Keystroke Attack}
-The following figure depicts how our side-channel can detect keystrokes. Moreover, we also present accuracy numbers.
+\begin{minipage}{\linewidth}
+\section*{Keystroke Attack}
 \corresponds{figure 15}
 \begin{figure}[H]
 \adjustbox{max width=\hsize}{\input{tikz_scripts/keystroke_attack_time.tikz}}
 \label{fig:keystroke_attack_results_time}
-\vspace{-0.4cm}
 \end{figure}
 
 \newcommand{\keystrokedata}[1]{\accessdatfile{keystroke}{#1}}
@@ -169,22 +181,30 @@ The following figure depicts how our side-channel can detect keystrokes. Moreove
     \item Precision: $\keystrokedata{prec_mean} \pm \keystrokedata{prec_stdev} \%$
     \item Recall: $\keystrokedata{recall_mean} \pm \keystrokedata{recall_stdev} \%$
 \end{itemize}
+\hrule
+\end{minipage}
 
-\section{Remote Covert Channel}
-Here, we show results after running the remote covert channel experiment.
-
+\begin{minipage}{\linewidth}
+\section*{Remote Covert Channel}
+\corresponds{table 5}
 \newcommand{\remotecovertdata}[1]{\accessdatfile{remote-covert}{#1}}
 \begin{itemize}
     \item Bandwidth: $\remotecovertdata{bws_mean} \pm \remotecovertdata{bws_stdev} \% $
     \item Accuracy: $\remotecovertdata{acc_mean} \pm \remotecovertdata{acc_stdev} \% $
     \item Packets per bit: $\remotecovertdata{packets_per_bit_mean} \pm \remotecovertdata{packets_per_bit_stdev} \% $
 \end{itemize}
+\hrule
+\end{minipage}
 
 
-\section{Noteboard Attack}
-Here, we show results after running the noteboard attack.
+\begin{minipage}{\linewidth}
+\section*{Noteboard Attack}
+\corresponds{table 7}
 \newcommand{\noteboarddata}[1]{\accessdatfile{noteboard}{#1}}
 \begin{itemize}
     \item Accuracy: $\noteboarddata{noteboard_acc_mean} \pm \noteboarddata{noteboard_acc_stdev} \% $
 \end{itemize}
+\hrule
+\end{minipage}
+
 \end{document}  
