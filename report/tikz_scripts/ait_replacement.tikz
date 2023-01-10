@@ -1,0 +1,30 @@
+% \vspace{-0.4cm}
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={\# AIT cache lines ($N$)},
+ylabel={AIT miss rate},
+% title={(b) Reverse order},
+% ylabel style={text width=2cm,align=center},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=0,
+xmax=32,
+xtick={0,8,16,24,32},
+ymin=0,
+ymax=1,
+height=3.5cm,
+legend columns=1,
+legend cell align=left,
+legend image post style={scale=0.6}, 
+legend style={nodes={scale=0.75},draw=none,anchor=north,at={(0.5,1.6)}},
+]
+\addplot+[thick,mark=triangle,mark size=1,draw=blue,mark indices={2,4,6,...,32}] table[x=Iteration,y=Rate,col sep=comma] {results_csv/ait_replacement_same_order.csv};
+\addplot+[thick,mark=*,mark size=1,draw=red!60,mark indices={2,4,6,...,32}] table[x=Iteration,y=Rate,col sep=comma] {results_csv/ait_replacement_reverse_order.csv};
+\addplot+[thick,mark=o,mark size=1,draw=black!20,mark indices={2,4,6,...,32}] table[x=Iteration,y=Rate,col sep=comma] {results_csv/ait_replacement_random_order.csv};
+\legend{Same order, Reverse order, Random order}
+\end{axis}
+\end{tikzpicture}

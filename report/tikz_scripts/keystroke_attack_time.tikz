@@ -1,0 +1,39 @@
+\begin{tikzpicture}
+    \begin{groupplot}[
+    group style={group size= 1 by 2, vertical sep=0.5cm},
+    ]
+    
+    \nextgroupplot[style={font=\footnotesize},
+    ylabel={$\Delta T$ in ms},
+    % y label style={align=center,text width=2cm},
+    xtick pos=bottom,
+    ytick pos=left,
+    % xticklabel style={/pgf/number format/1000 sep=},
+    xticklabel=\empty,
+    yticklabel style={/pgf/number format/1000 sep=},
+    width=\hsize,
+    legend image post style={scale=0.6}, 
+    %axis y line*=left,
+    height=3cm,
+    legend style={at={(1.0,1.0)}, anchor=north east, legend columns=2, font=\footnotesize,draw=none,fill=none},]
+    \addplot[blue!80] table [x=index,y=reference, col sep=comma] {results_csv/keystroke_attack_result_time.csv};
+    \addlegendentry{Reference};
+    \nextgroupplot[style={font=\footnotesize},
+    yshift=0.35cm,
+    ylabel={$\Delta T$ in ms},
+    xlabel={Keystroke index},
+    % y label style={align=center,text width=2cm},
+    xtick pos=bottom,
+    ytick pos=left,
+    xticklabel style={/pgf/number format/1000 sep=},
+    yticklabel style={/pgf/number format/1000 sep=},
+    width=\hsize,
+    legend image post style={scale=0.6}, 
+    %axis y line*=left,
+    height=3cm,
+    legend style={at={(1.0,1.0)}, anchor=north east, legend columns=2, font=\footnotesize,draw=none,fill=none},]
+    \addplot[red!40] table [x=index,y=result, col sep=comma] {results_csv/keystroke_attack_result_time.csv};
+    \addlegendentry{RMW side-channel};
+    \end{groupplot}
+\end{tikzpicture}
+\vspace{-0.5cm}

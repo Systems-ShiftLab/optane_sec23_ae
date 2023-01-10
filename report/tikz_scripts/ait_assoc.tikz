@@ -1,0 +1,41 @@
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={Memory footprint (Bytes)},
+ylabel={Read latency (ns)},
+% title={(a) Same order},
+% ylabel style={text width=2cm,align=center},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=8192,
+xmax=33554432,
+xtick={4096,65536,1048576,16777216},
+xticklabels={\SI{4}{\kilo\byte},6\SI{4}{\kilo\byte},1MB,\SI{16}{\mega\byte}},
+ymin=100,
+ymax=500,
+xmode=log,
+height=3.5cm,
+legend columns=2,
+legend cell align=left,
+legend image post style={scale=0.6}, 
+legend style={nodes={scale=0.75},draw=none,anchor=north,at={(0.5,1.6)}},
+]
+\addplot+[thick,mark=none,y filter/.expression={y/2.1},black] table[x=size,y=mask_clean,col sep=comma] {results_csv/ait_assoc.csv};
+\addplot+[thick,mark=none,y filter/.expression={y/2.1},green] table[x=size,y=mask_12,col sep=comma] {results_csv/ait_assoc.csv};
+\addplot+[thick,mark=none,y filter/.expression={y/2.1},blue,dotted] table[x=size,y=mask_19,col sep=comma] {results_csv/ait_assoc.csv};
+\addplot+[thick,mark=none,y filter/.expression={y/2.1},gray,dotted] table[x=size,y=mask_20,col sep=comma] {results_csv/ait_assoc.csv};
+\addplot+[thick,mark=none,y filter/.expression={y/2.1},red,dotted] table[x=size,y=mask_12-13,col sep=comma] {results_csv/ait_assoc.csv};
+\addplot+[thick,mark=none,y filter/.expression={y/2.1},red] table[x=size,y=mask_12-19,col sep=comma] {results_csv/ait_assoc.csv};
+\draw[gray,densely dotted,thick] (axis cs:65536,100) -- (axis cs:65536,500);
+\node[draw=none, text width=2cm] at (axis cs:300000,165) {Size of one set};
+\draw[->,black,thick] (axis cs:32768,200) -- (axis cs:65536,270);
+\draw[gray,densely dotted,thick] (axis cs:16777216,100) -- (axis cs:16777216,500);
+\node[draw=none, text width=2cm] at (axis cs:1600000,460) {Size of AIT};
+\draw[->,black,thick] (axis cs:6000000,460) -- (axis cs:16777216,420);
+
+\legend{No mask, mask bit 12, mask bit 19, mask bit 20, mask bit 12-13, mask bit 12-19}
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={Address distance: $\mathit{offset}\cdot 256$ (Bytes)},
+xlabel style={text width=3.5cm,align=center},
+ylabel={\# Extra writes to trigger wear-leveling},
+% title={(a) },
+ylabel style={text width=2.35cm,align=center},
+width=0.92\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=0,
+xmax=4096,
+xtick={0,256,1024,2048,4096},
+xticklabels={0,256,1 kB,2 kB,4 kB},
+ymin=0,
+ymax=15000,
+height=3.5cm,
+yticklabel style={/pgf/number format/1000 sep=},
+xticklabel style={rotate=60,/pgf/number format/1000 sep=},
+]
+\addplot+[thick,mark=*,mark size=1] table[x=offset,y=remaining_writes,col sep=comma] {results_csv/wearlevel_counter.csv};
+\draw[gray,densely dotted,thick] (axis cs:256,0) -- (axis cs:256,15000);
+\draw[black,thick] (axis cs:20,4000) -- (axis cs:250,4000);
+\draw[black,thick] (axis cs:20,3400) -- (axis cs:20,4600);
+\draw[black,thick] (axis cs:250,3400) -- (axis cs:250,4600);
+\node[draw=none, text width=1.4cm] at (axis cs:2600,5000) {Counter Granularity};
+\draw[->,black,thick] (axis cs:1000,5000) -- (axis cs:400,4000) ;
+\end{axis}
+\end{tikzpicture}
+\vspace{-0.4cm}

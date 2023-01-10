@@ -1,0 +1,28 @@
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={Unique locations ($\times 10^3$)},
+ylabel={AIT hit latency (ns)},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=1,
+xmax=10,
+ymin=250,
+ymax=550,
+height=3.5cm,
+]
+\addplot+[
+    thick,mark=".", 
+    y filter/.expression={y/2.1},
+    x filter/.expression={x/1000}
+] table[x=location,y=latency,col sep=comma] {results_csv/ait_ecc.csv};
+\node[draw=none, text=red, align=flush left] at (axis cs:8,500) {Unexpected latencies};
+\draw[->,red,thick] (axis cs:6.5,475) -- (axis cs:6,450);
+\node[draw=none, align=flush right] at (axis cs:3.5,300) {Normal AIT hit latencies};
+\draw[->,black,thick] (axis cs:5.5,305) -- (axis cs:6,330);
+
+\end{axis}
+\end{tikzpicture}

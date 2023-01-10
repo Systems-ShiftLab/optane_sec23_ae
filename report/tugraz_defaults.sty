@@ -1,0 +1,439 @@
+\ProvidesPackage{tugraz_defaults}
+\usepackage[hyphens]{url}
+\PassOptionsToPackage{bookmarks,hidelinks}{hyperref}
+\usepackage{hyperref}
+\hypersetup{breaklinks=true}
+\usepackage[utf8]{inputenc}
+
+% \usepackage[table,dvipsnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{arydshln}
+\usepackage{booktabs}
+% \usepackage{cite} % to sort citations
+\usepackage{collcell}
+\usepackage{comment}
+%\usepackage{filecontents}
+\usepackage{float}
+\usepackage{ifthenx}
+\usepackage{lipsum}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{nicefrac}
+\usepackage{paralist}
+\usepackage{csquotes}
+\usepackage{textcomp}
+%\usepackage{flushend}
+% \usepackage{upgreek}
+\usepackage[binary-units=true]{siunitx}
+% \sisetup{per-mode=symbol,per-symbol = p}
+\sisetup{group-separator = \text{\,}}
+\usepackage{threeparttable}
+\PassOptionsToPackage{table}{xcolor}\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{placeins}
+% \usepackage[numbers,sort&compress]{natbib}
+\def\subheading#1{\medskip\noindent{\boldmath\textbf{#1}}~\ignorespaces}
+
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{xcolor}
+% \usepackage{fdsymbol}
+
+% ------------------------------
+% Fancy plots
+\usepackage{tikz}
+\usetikzlibrary{external}
+%\tikzexternalize[prefix=tikz/,only named=true,mode=list and make] % TODO
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usetikzlibrary{pgfplots.groupplots}
+\usetikzlibrary{arrows}
+\usetikzlibrary{patterns}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{shapes.arrows}
+\usetikzlibrary{shapes.geometric,shapes.misc}
+\usetikzlibrary{pgfplots.groupplots}
+\pgfplotsset{compat=newest}
+% ------------------------------
+
+
+% ------------------------------
+% Fancy captions
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\captionsetup[figure]{skip=5pt,labelfont={normal},font={normal}} 
+%\captionsetup[subfigure]{skip=10pt,labelfont={bf,normal},font={bf,normal}}
+\captionsetup[table]{skip=5pt,labelfont={normal},font={normal}}
+%\captionsetup[lstlisting]{labelformat=simple,skip=10pt,labelfont={normal},font={normal}}
+% ------------------------------
+
+\definecolor{lukasred}{HTML}{950000}
+\definecolor{andreasgreen}{HTML}{2df056}
+
+% ------------------------------
+% Fancy notes
+\usepackage{letltxmacro}
+\setlength{\marginparwidth}{1.5cm}
+\reversemarginpar
+\ifDraft
+\usepackage[disable]{todonotes}
+\else
+\usepackage{todonotes}
+\fi
+\usepackage{marginnote} 
+\let\marginpar\marginnote
+\LetLtxMacro{\oldtodo}{\todo}
+\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[fancyline,size=\footnotesize,#1]{#2}\tikzexternalenable}
+\renewcommand{\todo}[1]{\tikzexternaldisable\oldtodo[fancyline,size=\footnotesize]{#1}\tikzexternalenable}
+\newcommand{\notesk}[2][]{\tikzexternaldisable\oldtodo[color=violet!40,fancyline,size=\footnotesize,#1]{\textbf{SK} #2}\tikzexternalenable}
+\renewcommand{\notesk}[1]{\tikzexternaldisable\oldtodo[color=violet!40,fancyline,size=\footnotesize]{\textbf{SK} #1}\tikzexternalenable}
+\newcommand{\notema}[2][]{\tikzexternaldisable\oldtodo[color=blue!40,fancyline,size=\footnotesize,#1]{\textbf{M} #2}\tikzexternalenable}
+\renewcommand{\notema}[1]{\tikzexternaldisable\oldtodo[color=blue!40,fancyline,size=\footnotesize]{\textbf{M} #1}\tikzexternalenable}
+\newcommand{\notesl}[2][]{\tikzexternaldisable\oldtodo[color=yellow!40,fancyline,size=\footnotesize,#1]{\textbf{SL} #2}\tikzexternalenable}
+\renewcommand{\notesl}[1]{\tikzexternaldisable\oldtodo[color=yellow!40,fancyline,size=\footnotesize]{\textbf{SL} #1}\tikzexternalenable}
+\newcommand{\notea}[2][]{\tikzexternaldisable\oldtodo[color=andreasgreen,fancyline,size=\footnotesize,#1]{\textbf{A} #2}\tikzexternalenable}
+\renewcommand{\notea}[1]{\tikzexternaldisable\oldtodo[color=andreasgreen,fancyline,size=\footnotesize]{\textbf{A} #1}\tikzexternalenable}
+\newcommand{\notes}[2][]{\tikzexternaldisable\oldtodo[color=orange,fancyline,size=\footnotesize,#1]{\textbf{S} #2}\tikzexternalenable}
+\renewcommand{\notes}[1]{\tikzexternaldisable\oldtodo[color=orange,fancyline,size=\footnotesize]{\textbf{S} #1}\tikzexternalenable}
+
+\newcommand{\TODO}{\hl{TODO}\xspace }
+
+% ------------------------------
+
+% ------------------------------
+% Fancy figures
+\usepackage{xparse}
+\setdefaultleftmargin{1.5em}{}{}{}{.5em}{.5em}
+\NewDocumentEnvironment{figureA}{omo}{\begin{figure}[#1]\tikzsetnextfilename{#2}\centering}{\IfNoValueTF {#3}{}{\caption{#3}}\label{fig:#2}\end{figure}}
+\NewDocumentEnvironment{subfigureA}{ommo}{\begin{su\newcommand{\noted}[2][]{\tikzexternaldisable\oldtodo[color=red!40,fancyline,size=\footnotesize,#1]{\textbf{D} #2}\tikzexternalenable}
+\renewcommand{\noted}[1]{\tikzexternaldisable\oldtodo[color=red!40,fancyline,size=\footnotesize]{\textbf{D} #1}\tikzexternalenable}
+bfigure}[#1]{#2}\tikzsetnextfilename{#3}\centering}{\IfNoValueTF {#4}{}{\caption{#4}}\label{fig:#3}\end{subfigure}}
+\NewDocumentEnvironment{figureA*}{omo}{\begin{figure*}[#1]\tikzsetnextfilename{#2}\centering}{\IfNoValueTF {#3}{}{\caption{#3}}\label{fig:#2}\end{figure*}}
+\NewDocumentEnvironment{subfigureA*}{ommo}{\begin{subfigure*}[#1]{#2}\tikzsetnextfilename{#3}\centering}{\IfNoValueTF {#4}{}{\caption{#4}}\label{fig:#3}\end{subfigure*}}
+% ------------------------------
+
+% ------------------------------
+% Fancy algorithms and code
+\usepackage{algorithmic}
+\usepackage[ruled]{algorithm2e}
+\usepackage{listings}
+\newfloat{listing}{tbhp}{lst}%[section]
+\floatname{listing}{Listing}
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\ttfamily\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  language=C,                      % the language of the code
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny,               % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  %title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+  escapeinside={(*@}{@*)},
+  columns=fullflexible,
+  breaklines=true,
+  xleftmargin=16.5pt,
+  xrightmargin=-16.5pt,
+  framexleftmargin=13pt,
+  framexrightmargin=-20.5pt
+}
+\lstdefinelanguage
+   [x64]{Assembler}     % add a "x64" dialect of Assembler
+   [x86masm]{Assembler} % based on the "x86masm" dialect
+   % with these extra keywords:
+   {morekeywords={CDQE,CQO,CMPSQ,CMPXCHG16B,JRCXZ,LODSQ,MOVSXD, %
+                  POPFQ,PUSHFQ,SCASQ,STOSQ,IRETQ,RDTSCP,SWAPGS, %
+                  rax,rdx,rcx,rbx,rsi,rdi,rsp,rbp, %
+                  r8,r8d,r8w,r8b,r9,r9d,r9w,r9b}} % etc.
+
+\lstdefinestyle{customc}
+{
+  %belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  %xleftmargin=\parindent,
+  captionpos=b,                    % sets the caption-position to bottom
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{black},
+  commentstyle=\itshape\color{gray!70!black},
+  identifierstyle=\color{black},
+  stringstyle=\color{red!70!black},
+  emph={static,volatile,double,float,signed,unsigned,int,void,size_t,char},
+  emphstyle={\bfseries\color{blue}},
+  numbersep=5pt,
+}
+\usepackage{fancyvrb}
+
+
+\lstdefinestyle{customasm}
+{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  language={[x86masm]Assembler},
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{black},
+  commentstyle=\itshape\color{gray!70!black}\ttfamily,
+  identifierstyle=\color{black},
+  stringstyle=\color{black!70!black},
+  morekeywords={qword,byte,mov,shl,cdqe,cqo,cmpsq,callq,nopl,retq,cmpxchg16b,jrcxz,lodsq,movsxd, %
+                  pushl,popl,outb,orb,cmpl,salb,testl,orl,inb,inl,subl,adcb,testb,addb,xorb,adcl,popfq,pushq,movq,subq,addq,popq,movl,addl,cmpq,pushfq,scasq,stosq,iretq,rdtscp,swapgs, %
+                  rax,rdx,rcx,rbx,rsi,rdi,rsp,rbp, %
+                  r8,r8d,r8w,r8b,r9,r9d,r9w,r9b, %
+                  r10,r10d,r10w,r10b,r11,r11d,r11w,r11b, %
+                  r12,r12d,r12w,r12b,r13,r13d,r13w,r13b, %
+                  r14,r14d,r14w,r14b,r15,r15d,r15w,r15b}
+}
+
+\newcommand\Highlight[1]{\underline{\textcolor{red}{#1}}}
+\newcommand\HighlightB[1]{\textbf{\textcolor{blue}{#1}}}
+
+\newcommand\HighlightD[1]{{\textcolor{green!80!black}{#1}}}
+
+\newenvironment{Plain}[1][]
+  { \VerbatimEnvironment%
+    \begin{Verbatim}[#1]}
+  { \end{Verbatim}  } 
+
+% ------------------------------
+
+% ------------------------------
+% New commands
+\newcommand{\gbr}[1]{\left\{#1\right\}}
+%\DeclareMathOperator{\KB}{KB}
+\newcommand{\SIx}[1]{\num{#1}\relax}
+%\DeclareMathOperator*{\argmax}{arg\,max}
+%\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\xor}{\oplus}
+\newcommand{\etal}{et~al.\ } % typography nerd
+\newcommand{\ie}{\textit{i.e.},\ } % typography nerd
+\newcommand{\eg}{e.g.,\ } % typography nerd
+\newcommand{\cf}{cf.\ } % typography nerd
+\newcommand{\KeyDrown}{\emph{KeyDrown}\xspace}
+\newcommand{\FlushOnly}{Flush+Flush\xspace}
+\newcommand{\clflush}{\texttt{clflush}\xspace}
+\newcommand{\FlushReload}{Flush+\allowbreak Reload\xspace}
+\newcommand{\EvictReload}{Evict+\allowbreak Reload\xspace}
+\newcommand{\EvictTime}{Evict+\allowbreak Time\xspace}
+\newcommand{\PrimeProbe}{Prime+\allowbreak Probe\xspace}
+\newcommand{\MultiPrimeProbe}{Multi-\allowbreak Prime+\allowbreak Probe\xspace}
+\newcommand{\FlushFlush}{Flush+\allowbreak Flush\xspace}
+\newcommand{\GTKplus}{\emph{GTK+}\xspace}
+\newcommand{\libgdk}{\emph{libgdk}\xspace}
+\newcommand{\OnePlus}{OnePlus 3t\xspace}
+\newcommand{\FScore}{F-score\xspace}
+
+\newcommand{\ReqOne}{\emph{R1}\xspace}
+\newcommand{\ReqTwo}{\emph{R2}\xspace}
+\newcommand{\ReqThree}{\emph{R3}\xspace}
+
+\usepackage{pifont}
+\newcommand{\xmark}{\leavevmode{\color{red}\ding{55}}}%
+\newcommand{\cmark}{\leavevmode{\color{TolDarkGreen}\ding{51}}}%
+\newcommand{\tmark}{\leavevmode{\color{orange!90!red}\large $\mathbf{\thicksim}$}}%
+\mathchardef\mhyphen="2D
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand*\circledb[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt,fill=black,text=white] (char) {#1};}}
+\newcommand*\circleds[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {\footnotesize #1};}}
+\newcommand*\circledsb[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.7pt,fill=black,text=white] (char) {\footnotesize #1};}}
+% ------------------------------
+
+
+\newcommand{\FakeMarker}{{\color{red}$\blacktriangle$}}
+\newcommand{\RealMarker}{{\color{green}$\bullet$}}
+
+\newfloat{lstfloat}{htbp}{lop}
+\floatname{lstfloat}{Listing}
+
+\usepackage{epsdice}
+\usepackage{soul}
+\usepackage[noabbrev,capitalize]{cleveref}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor row-ham-mer}
+
+\widowpenalty10000
+\clubpenalty10000
+
+% plot default colors
+\definecolor{TolDarkPurple}{HTML}{332288}
+\definecolor{TolDarkBlue}{HTML}{6699CC}
+\definecolor{TolLightBlue}{HTML}{88CCEE}
+\definecolor{TolLightGreen}{HTML}{44AA99}
+\definecolor{TolDarkGreen}{HTML}{117733}
+\definecolor{TolDarkBrown}{HTML}{999933}
+\definecolor{TolLightBrown}{HTML}{DDCC77}
+\definecolor{TolDarkRed}{HTML}{661100}
+\definecolor{TolLightRed}{HTML}{CC6677}
+\definecolor{TolLightPink}{HTML}{AA4466}
+\definecolor{TolDarkPink}{HTML}{882255}
+\definecolor{TolLightPurple}{HTML}{AA4499}
+
+% plot
+\definecolor{PlotColorBlue}{HTML}{2C7FB8}
+\definecolor{PlotColorRed}{HTML}{F03B20}
+\definecolor{PlotColorGreen}{HTML}{31A354}
+
+% colors
+\definecolor{red}{HTML}{F03B20}
+\definecolor{yellow}{HTML}{F5EE9A}
+\definecolor{green}{HTML}{BEDB39}
+\definecolor{blue}{HTML}{2C7FB8}
+
+
+\pgfplotscreateplotcyclelist{mbarplot cycle}{%
+  {draw=TolDarkBlue,    fill=TolDarkBlue!70},
+  {draw=TolLightBrown,  fill=TolLightBrown!70},
+  {draw=TolLightGreen,  fill=TolLightGreen!70},
+  {draw=TolDarkPink,    fill=TolDarkPink!70},
+  {draw=TolDarkPurple,  fill=TolDarkPurple!70},
+  {draw=TolDarkRed,     fill=TolDarkRed!70},
+  {draw=TolDarkBrown,   fill=TolDarkBrown!70},
+  {draw=TolLightRed,    fill=TolLightRed!70},
+  {draw=TolLightPink,   fill=TolLightPink!70},
+  {draw=TolLightPurple, fill=TolLightPurple!70},
+  {draw=TolLightBlue,   fill=TolLightBlue!70},
+  {draw=TolDarkGreen,   fill=TolDarkGreen!70},
+}
+
+\pgfplotscreateplotcyclelist{mlineplot cycle}{%
+  {TolDarkBlue, mark=*, mark size=1.5pt},
+  {TolLightBrown, mark=square*, mark size=1.3pt},
+  {TolLightGreen, mark=triangle*, mark size=1.5pt},
+  {TolDarkBrown, mark=diamond*, mark size=1.5pt},
+}
+
+\pgfplotsset{
+  compat=1.9
+}
+\pgfplotsset{
+  mlineplot/.style={
+%     mbaseplot,
+%     xmajorgrids=true,
+%     ymajorgrids=true,
+%     major grid style={dotted},
+%     axis x line=bottom,
+%     axis y line=left,
+%     legend style={
+%       cells={anchor=west},
+%       draw=none
+%     },
+%     cycle list name=mlineplot cycle,
+  },
+}
+
+\pgfplotsset{
+  mbarplot base/.style={
+    mbaseplot,
+    bar width=6pt,
+    axis y line*=none,
+  },
+}
+
+\pgfplotsset{
+  mbarplot/.style={
+    mbarplot base,
+    ybar,
+    xmajorgrids=false,
+    ymajorgrids=true,
+    area legend,
+    legend image code/.code={%
+      \draw[#1] (0cm,-0.1cm) rectangle (0.15cm,0.1cm);
+    },
+    cycle list name=mbarplot cycle,
+  },
+}
+
+\pgfplotsset{
+  horizontal mbarplot/.style={
+    mbarplot base,
+    xmajorgrids=true,
+    ymajorgrids=false,
+    xbar stacked,
+    area legend,
+    legend image code/.code={%
+      \draw[#1] (0cm,-0.1cm) rectangle (0.15cm,0.1cm);
+    },
+    cycle list name=mbarplot cycle,
+  },
+}
+
+\pgfplotsset{
+  mbaseplot/.style={
+    legend style={
+      draw=none,
+      fill=none,
+      cells={anchor=west},
+    },
+    x tick label style={
+      font=\footnotesize
+    },
+    y tick label style={
+      font=\footnotesize
+    },
+    legend style={
+      font=\footnotesize
+    },
+    major grid style={
+      dotted,
+    },
+    axis x line*=bottom,
+  },
+  disable thousands separator/.style={
+    /pgf/number format/.cd,
+      1000 sep={}
+  },
+}
+
+\usepackage{diagbox}
+\usepackage{oplotsymbl}
+
+\LetLtxMacro{\oldcircletfill}{\circletfill}
+\LetLtxMacro{\oldcirclet}{\circlet}
+\LetLtxMacro{\oldcircletfillhl}{\circletfillhl}
+\renewcommand{\circletfill}{\raisebox{-0.9pt}{\tikzsetnextfilename{circletfill}\oldcircletfill}}
+\renewcommand{\circlet}{\raisebox{-0.9pt}{\tikzsetnextfilename{circlet}\oldcirclet}}
+\renewcommand{\circletfillhl}{\raisebox{-0.9pt}{\tikzsetnextfilename{circletfillhl}\oldcircletfillhl}}
+  
+\newcommand{\cmarkfull}{\multicolumn{1}{c} {\circletfill \phantom{*}}}
+\newcommand{\cmarkempty}{\multicolumn{1}{c} {\circlet \phantom{*}}}
+\newcommand{\cmarkhalf}{\multicolumn{1}{c} {\circletfillhl \phantom{*}}}
+
+\newcommand{\cstarletfill}{\multicolumn{1}{c} {\starletfill \phantom{*}}}
+\newcommand{\cstarlet}{\multicolumn{1}{c} {\starlet \phantom{*}}}
+
+\newcommand{\cmarkfulls}{\multicolumn{1}{c} {\circletfill *}}
+\newcommand{\cmarkemptys}{\multicolumn{1}{c} {\circlet *}}
+\newcommand{\cmarkhalfs}{\multicolumn{1}{c} {\circletfillhl *}}
+
+\newcommand{\cmarkfulld}{\multicolumn{1}{c} {\circletfill $^\dagger$}}
+\newcommand{\cmarkemptyd}{\multicolumn{1}{c} {\circlet $^\dagger$}}
+\newcommand{\cmarkhalfd}{\multicolumn{1}{c} {\circletfillhl $^\dagger$}}
+
+% cite authors
+% \newcommand{\citeA}[1]{\citeauthor{#1}~\cite{#1}}
+
+% micro ops
+\newcommand{\muop}{$\mu$OP\xspace}
+\newcommand{\muops}{$\mu$OPs\xspace}

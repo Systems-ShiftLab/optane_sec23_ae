@@ -1,0 +1,33 @@
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={Address distance: $\mathit{offset}\cdot 256$ (Bytes)},
+xlabel style={text width=3.5cm,align=center},
+ylabel={\# Extra writes to trigger wear-leveling},
+% title={(b)},
+ylabel style={text width=2.35cm,align=center},
+width=0.92\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=0,
+xmax=8192,
+xtick={0,2048,4096,6144,8192},
+xticklabels={0,2 kB, 4 kB, 6 kB, 8 kB},
+ymin=0,
+ymax=15000,
+height=3.5cm,
+yticklabel style={/pgf/number format/1000 sep=},
+xticklabel style={rotate=60,/pgf/number format/1000 sep=},
+]
+\addplot+[thick,mark=*,mark size=1] table[x=offset,y=writes_to_wl,col sep=comma] {results_csv/wearlevel_gran.csv};
+\draw[gray,densely dotted,thick] (axis cs:4096,0) -- (axis cs:4096,15000);
+\draw[black,thick] (axis cs:60,4000) -- (axis cs:4000,4000);
+\draw[black,thick] (axis cs:60,4600) -- (axis cs:60,3400);
+\draw[black,thick] (axis cs:4000,4600) -- (axis cs:4000,3500);
+\node[draw=none, text width=2.4cm] at (axis cs:4500,2000) {Remap Granularity};
+% \draw[->,black,thick] (axis cs:3200,13000) -- (axis cs:2000,12500) ;
+\end{axis}
+\end{tikzpicture}
+\vspace{-0.4cm}

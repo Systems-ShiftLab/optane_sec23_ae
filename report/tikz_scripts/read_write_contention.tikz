@@ -1,0 +1,83 @@
+\begin{tikzpicture}
+\begin{axis}[
+% mlineplot,
+ybar,
+style={font=\footnotesize},
+xlabel={Read latency (ns)},
+ylabel={Frequency [\%]},
+% ylabel={Density},
+% title={(b) Reverse order},
+% ylabel style={text width=4cm,align=center},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+ytick = {0,0.2,0.4,0.6,0.8},
+yticklabels={0\,\%,20\,\%,40\,\%,60\,\%,80\,\%},
+xmin=300,
+xmax=1200,
+% xtick={30,...,128},
+ymin=0,
+ymax=0.9,
+xticklabel style={/pgf/number format/1000 sep=},
+height=3.3cm,
+legend columns=2,
+legend cell align=left,
+legend image post style={scale=0.6}, 
+legend style={nodes={scale=0.75},draw=none},
+]
+\addplot+[    
+    hist={bins=200,data min=0, data max=2389},
+    x filter/.expression={x/2.1},
+    y filter/.expression={y==0 ? -10 : y/100},
+    draw=blue,
+    fill=blue!50,
+    opacity=0.7
+] table[y index=0] {results_csv/rw_cont_read_read.csv};
+\addplot+[    
+    hist={bins=200,data min=0, data max=2389},
+    x filter/.expression={x/2.1},
+    y filter/.expression={y==0 ? -10 : y/100},
+    draw=red,
+    fill=red!10,
+    opacity=0.7,
+    pattern=north east lines
+] table[y index=0] {results_csv/rw_cont_read_write_10.csv};
+\addplot+[    
+    hist={bins=200,data min=0, data max=2389},
+    x filter/.expression={x/2.1},
+    y filter/.expression={y==0 ? -10 : y/100},
+    draw=red,
+    fill=red!30,
+    opacity=0.7,
+] table[y index=0] {results_csv/rw_cont_read_write_30.csv};
+\addplot+[    
+    hist={bins=200,data min=0, data max=2389},
+    x filter/.expression={x/2.1},
+    y filter/.expression={y==0 ? -10 : y/100},
+    draw=red,
+    fill=red!50,
+    opacity=0.7,
+    pattern=horizontal lines
+] table[y index=0] {results_csv/rw_cont_read_write_50.csv};
+\addplot+[    
+    hist={bins=200,data min=0, data max=2389},
+    x filter/.expression={x/2.1},
+    y filter/.expression={y==0 ? -10 : y/100},
+    draw=red,
+    fill=red!100,
+    opacity=0.7,
+] table[y index=0] {results_csv/rw_cont_read_write_100.csv};
+\addplot+[    
+    hist={bins=200,data min=0, data max=2389},
+    x filter/.expression={x/2.1},
+    y filter/.expression={y==0 ? -10 : y/100},
+    draw=black,
+    fill=black!50,
+    opacity=0.7,
+    pattern=north west lines
+] table[y index=0] {results_csv/rw_cont_read.csv};
+\legend{Co-located reader (100\,\%), Co-located writer (10\,\%), Co-located writer (30\,\%), Co-located writer (50\,\%), Co-located writer (100\,\%),No co-located reader/writer, }
+\end{axis}
+\end{tikzpicture}
+\vspace{-0.5cm}

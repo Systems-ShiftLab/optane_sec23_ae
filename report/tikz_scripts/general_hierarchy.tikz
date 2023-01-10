@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={Memory footprint (Bytes)},
+ylabel={Read latency (ns)},
+% ylabel style={text width=2.5cm,align=center},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=64,
+xmax=67108864,
+xtick={64,256,1024,4096,16384,65536,262144,1048576,4194304,16777216,67108864},
+xticklabels={64,256,{1kB},{\SI{4}{\kilo\byte}},{16kB},{6\SI{4}{\kilo\byte}},{256kB},{1MB},{4MB},{\SI{16}{\mega\byte}},{64MB}},
+ymin=150,
+ymax=450,
+xmode=log,
+height=3.5cm,
+yticklabel style={/pgf/number format/1000 sep=},
+xticklabel style={rotate=45,/pgf/number format/1000 sep=},
+]
+\addplot+[thick,mark=none,y filter/.expression={y/2.1}] table[x=region_size,y=average_latency,col sep=comma] {results_csv/gen_hier.csv};
+\draw[gray,densely dotted,thick] (axis cs:16384,150) -- (axis cs:16384,500);
+\node[draw=none] at (axis cs:800,270) {RMW buffer size};
+\draw[->,black,thick] (axis cs:4200,240) -- (axis cs:16384,210);
+\draw[gray,densely dotted,thick] (axis cs:16777216,150) -- (axis cs:16777216,500);
+\node[draw=none] at (axis cs:1400000,420) {AIT buffer size};
+\draw[->,black,thick] (axis cs:8000000,390) -- (axis cs:16000000,350);
+\end{axis}
+\end{tikzpicture}

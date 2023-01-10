@@ -1,0 +1,31 @@
+\vspace{-0.4cm}
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={\# RMW cache lines ($N$)},
+ylabel={RMW miss rate},
+% title={(b) Reverse order},
+ylabel style={text width=3cm,align=center},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=1,
+xmax=128,
+xtick={1,32,...,128},
+xticklabels={1,32,64,96,128},
+ymin=0,
+ymax=1,
+height=3.5cm,
+legend columns=1,
+legend cell align=left,
+legend image post style={scale=0.6}, 
+legend style={nodes={scale=0.75},draw=none,anchor=north,at={(0.5,1.6)}},
+]
+\addplot+[thick,mark=triangle,mark size=1,draw=blue,mark indices={4,8,16,...,128}] table[x=Iteration,y=Rate,col sep=comma] {results_csv/rmw_replacement_same_order.csv};
+\addplot+[thick,mark=*,mark size=1,draw=red!60,mark indices={4,8,16,...,128}] table[x=Iteration,y=Rate,col sep=comma] {results_csv/rmw_replacement_reverse_order.csv};
+\addplot+[thick,mark=o,mark size=1,draw=black!20,mark indices={4,8,16,...,128}] table[x=Iteration,y=Rate,col sep=comma] {results_csv/rmw_replacement_random_order.csv};
+\legend{Same order, Reverse order, Random order}
+\end{axis}
+\end{tikzpicture}

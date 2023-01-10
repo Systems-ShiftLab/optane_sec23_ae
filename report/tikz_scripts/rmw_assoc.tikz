@@ -1,0 +1,37 @@
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={Memory footprint (Bytes)},
+ylabel={Read latency (ns)},
+% title={(a) Same order},
+ylabel style={text width=3cm,align=center},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=256,
+xmax=65536,
+xtick={256,1024,4096,16384,65536},
+xticklabels={256, 1kB, \SI{4}{\kilo\byte}, 16kB, 6\SI{4}{\kilo\byte}},
+ymin=100,
+ymax=400,
+xmode=log,
+height=3.5cm,
+legend columns=2,
+legend cell align=left,
+legend image post style={scale=0.6}, 
+legend style={nodes={scale=0.75},draw=none,anchor=north,at={(0.5,1.6)}},
+]
+\addplot+[thick,mark=*,mark size=0.5,y filter/.expression={y/2.1}] table[x=size,y=mask_clean,col sep=comma] {results_csv/rmw_assoc.csv};
+\addplot+[thick,mark=*,mark size=0.5,y filter/.expression={y/2.1}] table[x=size,y=mask_8,col sep=comma] {results_csv/rmw_assoc.csv};
+\addplot+[thick,mark=*,mark size=0.5,y filter/.expression={y/2.1}] table[x=size,y=mask_9,col sep=comma] {results_csv/rmw_assoc.csv};
+\addplot+[thick,mark=*,mark size=0.5,y filter/.expression={y/2.1}] table[x=size,y=mask_10,col sep=comma] {results_csv/rmw_assoc.csv};
+\addplot+[thick,mark=*,mark size=0.5,y filter/.expression={y/2.1}] table[x=size,y=mask_20,col sep=comma] {results_csv/rmw_assoc.csv};
+\addplot+[thick,mark=*,mark size=0.5,y filter/.expression={y/2.1}] table[x=size,y=mask_21,col sep=comma] {results_csv/rmw_assoc.csv};
+\node[draw=none, text width=2.3cm] at (axis cs:4096,330) {Results of different bitmasks overlap};
+\draw[->,black,thick] (axis cs:4096,290) -- (axis cs:16384,250);
+\legend{No mask, mask bit 8, mask bit 9, mask bit 10, mask bit 20, mask bit 21}
+\end{axis}
+\end{tikzpicture}
+\vspace{-0.5cm}

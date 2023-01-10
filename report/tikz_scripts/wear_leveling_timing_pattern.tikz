@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+\begin{axis}[
+mlineplot,
+style={font=\footnotesize},
+xlabel={Write count ($\times 10^3$)},
+ylabel={Write latency (\textmu s)},
+% title={(b) Reverse order},
+% ylabel style={text width=2.8cm,align=center},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+xmin=0,
+xmax=200,
+ymin=0,
+ymax=60,
+height=3.3cm,
+]
+\addplot+[
+    thick,mark=none, 
+    y filter/.expression={y/2100}, 
+    x filter/.expression={x/1000-20} % skip initialization
+] table[x=Iteration,y=Latency,col sep=comma] {results_csv/wearlevel_write.csv};
+\end{axis}
+\end{tikzpicture}
+\vspace{-0.4cm}
