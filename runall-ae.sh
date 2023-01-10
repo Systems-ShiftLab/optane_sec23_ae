@@ -15,6 +15,9 @@ for i in $(find -name "script-ae.sh") ; do
     )
 done
 
+mkdir -p report/results_csv
+mkdir -p report/results_dat
+
 cp $(find -name '*.csv' | grep result-ae ) report/results_csv
 cp $(find -name '*.dat' | grep result-ae ) report/results_dat
 
