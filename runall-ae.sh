@@ -7,7 +7,7 @@ cd "$script_dir"
 progress_file=${progress_file:-.overall-progress}
 
 export remote_ip=${remote_ip:-10.0.0.1}
-export remote_user=${remote_user:-suraajks}
+export remote_user=${remote_user:-usenix}
 
 
 local_hash=$(git rev-parse HEAD)
