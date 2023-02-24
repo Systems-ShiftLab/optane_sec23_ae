@@ -31,7 +31,7 @@ prepare_result() {
 
 
 export remote_ip=${remote_ip:-10.0.0.1}
-export remote_user=${remote_user:-suraajks}
+export remote_user=${remote_user:-usenix}
 remote_cmd () {
     ../common/remote_commands/generic.sh $*
 }

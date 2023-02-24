@@ -20,7 +20,7 @@ dimm_mnt=${dimm_mnt:-/mnt/pmem1}
 
 kv_port=${kv_port:-8080}
 remote_ip=${remote_ip:-10.0.0.1}
-remote_user=${remote_user:-suraajks}
+remote_user=${remote_user:-usenix}
 
 export kv_port
 export remote_ip
