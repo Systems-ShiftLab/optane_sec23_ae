@@ -11,7 +11,7 @@ export remote_user=${remote_user:-usenix}
 
 
 local_hash=$(git rev-parse HEAD)
-remote_cmd_res=$(common/remote_commands/generic.sh "cd optane_sec23_ae; git rev-parse HEAD")
+remote_cmd_res=$(common/remote_commands/generic.sh "cd optane_sec23_ae; git pull; git rev-parse HEAD")
 remote_hash=$(echo "$remote_cmd_res" | tail -n1)
 
 if [[ $local_hash != $remote_hash ]] ; then
@@ -25,10 +25,15 @@ fi
 truncate $progress_file -s0
 for i in $(find -name "script-ae.sh") ; do
     echo Running $i | tee -a $progress_file
+    startt=$(date +%s)
     (
         cd $(dirname $i)
         ./$(basename $i)
     )
+    endt=$(date +%s)
+    diff=$((endt-startt))
+    echo "Time: $diff" | tee -a $progress_file
+    echo $diff
 done
 
 mkdir -p report/results_csv
