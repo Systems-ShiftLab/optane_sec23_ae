@@ -18,9 +18,13 @@ void write_nt256_time(char *addr,uint64_t *tsp_start, uint64_t *tsp_end)
 
 	TSP_START
 	"vmovntdq  %%zmm0, 0x0(%[addr]) \n" 
+    "clflush (%[addr])\n"
 	"vmovntdq  %%zmm0, 0x40(%[addr]) \n"
+    "clflush 64(%[addr])\n"
 	"vmovntdq  %%zmm0, 0x80(%[addr]) \n"
+    "clflush 128(%[addr])\n"
 	"vmovntdq  %%zmm0, 0xC0(%[addr]) \n"
+    "clflush 192(%[addr])\n"
     "mfence \n"
 	TSP_END
 
