@@ -1,12 +1,36 @@
 # Artifact repository for 'Side Channel Attacks on Optane Persistent Memory'. 
 This readme contains basic commands to reproduce results of the experiments. 
 
-## Prerequisite Software 
-- ndctl/daxctl v68
-- pmdk 1.9.2
-- pmemkv 1.3
-- libuv 1.18
-- websocket-client (pip package)
+## Supported Environment
+
+### Hardware dependencies
+The experiments require a hardware platform as listed below:
+- CPU: Intel Cascade Lake.
+- Persistent Memory: 1st generation Optane DCPMM. If the server contains multiple Optane modules, they must be running under non-interleaved mode. 
+- Network: one-hop Ethernet connection between the two Optane servers (for remote covert channels and side-channel attacks).
+
+### Software dependencies
+The experiments require a software environment as listed below:
+- Operating system: Ubuntu 18.04, kernel v5.4.
+- Compiler: gcc and g++-7.5.
+- Libraries and tools: PMDK v1.9, ndctl v68, ipmctl v02.00.00.3852, pmemkv v1.3, libuv v1.18 and websocket-client (pip package). 
+- Optane mode: The Optane memory must be running in \emph{App Direct} mode using ipmctl.
+- File system for Optane: The Optane device must be mounted in DAX mode. 
+
+## Installing required dependencies
+- **pmdk v1.9** can be cloned, built, and installed from the [PMDK repository](https://github.com/pmem/pmdk/releases/tag/1.9.2)
+- **ndctl** can be built from [source](https://github.com/pmem/ndctl/releases/tag/v68) or can be installed from your distribution's [package repository](https://debian.pkgs.org/11/debian-main-amd64/ndctl_71.1-1_amd64.deb.html)
+- **ipmctl** can be built from [source](https://github.com/intel/ipmctl/releases/tag/v02.00.00.3852) or can be installed from your distribution's [package repository](https://ubuntu.pkgs.org/20.04/ubuntu-universe-amd64/ipmctl_02.00.00.3709+ds-1_amd64.deb.html)
+- **pmemkv** can be built from [source](https://github.com/pmem/pmemkv/releases/tag/1.3). It requires libpmemobj-cpp, which can be installed from [here](https://github.com/pmem/libpmemobj-cpp/releases/tag/1.11.1).
+- **libuv** can be installed from your distribution's [package repository](https://debian.pkgs.org/11/debian-main-amd64/libuv1-dev_1.40.0-2_amd64.deb.html).
+- **websocket-client** can be installed by running `pip install websocket-client`.
+
+## Configuring Optane
+- First, all Optane modules in your system need to be configured in AppDirect mode, without interleaving. This can be achieved with `ipmctl create -goal PersistentMemoryType=AppDirectNotInterleaved`. After a reboot, the new memory goal will be in effect.
+- Each of the persistent memory region needs to be configured in fsdax mode, which will create `/dev/pmemX` devices from persistent memory regions. Running `ndctl create-namespace -m fsdax` will create these fsdax namespaces.
+- Once we have a `/dev/pmemX` device, we need to create a DAX aware filesystem (such as ext4) on it. This can be done using `mkfs.ext4 /dev/pmemX`
+- Finally, this filesystem needs to be mounted in dax mode: `mount /dev/pmemX -o dax /mnt/pmemX`.
+
 
 ## Experimental Setup
 - To run all our experiments, we need 2 servers, both with Intel Optane DCPMM DIMMs installed. This is because some of our security attacks are performed over the network.
@@ -34,6 +58,18 @@ More precisely, this script does the following:
 ├── reverse         # Reverse engineering experiments
 └── util            # Low level (C / asm) code used in many experiments
 ```
+
+## Resources used per experiment
+
+- Reverse Engineering Heirarchy: [25 compute-minutes + 64GB pmem disk]
+- Reverse Engineering Bitmask Pointer Chasing: [3.5 compute-hours + 64 GB pmem disk]
+- Reverse Engineering Replacement Policy: [10 compute-minutes + 1 GB pmem disk]
+- Reverse Engineering Wearlevelling Policy: [15 compute-seconds + 1 GB pmem disk]
+- Reverse Engineering Read-Write Contention: [1 compute-minute + 1 GB pmem disk]
+- Local Covert Channel: [45 compute-minutes + 2 GB pmem disk]
+- Keystroke Side Channel: [1 compute-hour + 1 GB pmem disk]
+- Remote Covert Channel: [35 compute-seconds + 2 GB pmem disk]
+- Noteboard Attack: [1 compute-hour + 1 GB pmem disk]
 
 ## Cite Us
 ``` BibTeX
