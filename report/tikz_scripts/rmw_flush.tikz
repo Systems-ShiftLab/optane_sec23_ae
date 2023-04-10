@@ -1,0 +1,39 @@
+\begin{tikzpicture}
+\begin{axis}[
+ybar,
+style={font=\footnotesize},
+xlabel={Read latency (ns)},
+ylabel={Frequency [\%]},
+% ylabel={Density},
+ylabel style={text width=2.5cm,align=center},
+width=1\hsize,
+scaled y ticks=false,
+xtick pos=bottom,
+ytick pos=left,
+ytick = {0,0.2,0.4},
+yticklabels={0\,\%,20\,\%,40\,\%},
+xmin=100,
+xmax=450,
+ymin=0,
+ymax=0.5,
+height=3.3cm,
+legend columns=2,
+legend cell align=left,
+legend image post style={scale=0.6}, 
+legend style={nodes={scale=0.75},draw=none,anchor=north,at={(0.5,1.3)}},
+]
+\addplot+[
+    hist={bins=200,data min=0, data max=1134},
+    y filter/.expression={y==0 ? -10 : y/100},
+    x filter/.expression={x/2.1},
+] table[y index=0] {results_csv/read_wo_clflush.csv};
+\addplot+[
+    hist={bins=200,data min=0, data max=1134},
+    y filter/.expression={y==0 ? -10 : y/100},
+    x filter/.expression={x/2.1},
+    pattern=north east lines,
+] table[y index=0] {results_csv/read_w_clflush.csv};
+\legend{{Normal RMW hit latency~~}, {With \texttt{CLFLUSH}}}
+\end{axis}
+\end{tikzpicture}
+\vspace{-0.4cm}
